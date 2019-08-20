@@ -5,13 +5,13 @@ class LoginPage < BasePage
   attr_accessor :chatMessageInput, :leaveCallButton, :userSettings, :logOutButton
 
   def initialize
-    @email = Element.new(:xpath, "/html/body/div/div[1]/div/div[2]/div/form/div/div[3]/div[1]/div/input")
+    @email = Element.new(:xpath, "//input[@type='email']")
 
-    @password = Element.new(:xpath, "/html/body/div/div[1]/div/div[2]/div/form/div/div[3]/div[2]/div/input")
+    @password = Element.new(:xpath, "//input[@type='password']")
 
-    @loginButton = Element.new(:xpath, "/html/body/div/div[1]/div/div[2]/div/form/div/div[3]/button[2]")
+    @loginButton = Element.new(:xpath, "//div[text()='Login']")
 
-    @skipButton = Element.new(:xpath, "/html/body/div/div[4]/div[2]/div/form/div/button[1]")
+    @skipButton = Element.new(:xpath, "//*[text()='Skip']")
 
     @homeButton = Element.new(:css,".home-icon")
 
@@ -25,11 +25,12 @@ class LoginPage < BasePage
   
     @chatMessageInput = Element.new(:css,"div.chat.flex-vertical.flex-spacer.private > div.content.flex-spacer.flex-horizontal > div > form > div > div > textarea")
 
-    @userSettings = Element.new(:xpath,"//*[@id='app-mount']/div[1]/div/div[1]/div/div/div[2]/div[2]/div[1]/div[2]/div[3]/div[3]")
+    @userSettings = Element.new(:css,"[aria-label='User Settings']")
 
     @logOutButton = Element.new(:xpath,"//*[@id='app-mount']/div[1]/div/div[1]/div[2]/div/div[1]/div/div/div/div/div[19]")
 
     @logOutConfirm = Element.new(:xpath,"//*[@id='app-mount']/div[4]/div[2]/div/form/div[3]/button[1]")
+    
   end
 
   def fill_form(user)
@@ -43,5 +44,8 @@ class LoginPage < BasePage
 
   def load_home_page
     visit ''
+    @email.visible?
+    @password.visible?
+    @loginButton.visible?
   end
 end

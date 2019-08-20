@@ -1,36 +1,35 @@
 require_relative '../../features/pages/base'
 # Login page class
-class LoginPage < BasePage
-  attr_accessor :email, :password, :loginButton, :skipButton, :homeButton, :friendsTab, :friendTag, :voiceCallButton
+class HomePage < BasePage
+  attr_accessor :email, :password, :loginButton, :skipButton, :homeButton, :friendsTab, :friendTag, :voiceCallButton, :privacyButton, :checkBoxEdge
   attr_accessor :chatMessageInput, :leaveCallButton, :userSettings, :logOutButton
 
   def initialize
-    @email = Element.new(:xpath, "/html/body/div/div[1]/div/div[2]/div/form/div/div[3]/div[1]/div/input")
 
-    @password = Element.new(:xpath, "/html/body/div/div[1]/div/div[2]/div/form/div/div[3]/div[2]/div/input")
+    @homeButton = Element.new(:css,"[aria-label='Home']")
 
-    @loginButton = Element.new(:xpath, "/html/body/div/div[1]/div/div[2]/div/form/div/div[3]/button[2]")
+    @friendsTab = Element.new(:xpath,"//div[text()='Friends']")
 
-    @skipButton = Element.new(:xpath, "/html/body/div/div[4]/div[2]/div/form/div/button[1]")
+    @friendTag = Element.new(:xpath,"//span[text()='#']")  
 
-    @homeButton = Element.new(:css,".home-icon")
+    @voiceCallButton = Element.new(:css,"[aria-label='Start Voice Call']")
 
-    @friendsTab = Element.new(:xpath,"//*[@id='app-mount']/div[1]/div/div[1]/div/div/div[2]/div[2]/div[1]/div[1]/div[2]/div/span/div[2]")
-
-    @friendTag = Element.new(:css,".discord-tag")   
-
-    @voiceCallButton = Element.new(:css,"div.alignCenter-1dQNNs:nth-child(3) > div:nth-child(1) > svg:nth-child(2)")
-
-    @leaveCallButton = Element.new(:xpath,"//*[@id='app-mount']/div[1]/div/div[1]/div/div/div[2]/div[2]/div[2]/div[2]/div/div/div[2]/div[3]/div/div[2]/button[3]/div")
+    @leaveCallButton = Element.new(:xpath,"//div[text()='Leave Call']")
   
-    @chatMessageInput = Element.new(:css,"div.chat.flex-vertical.flex-spacer.private > div.content.flex-spacer.flex-horizontal > div > form > div > div > textarea")
+    @chatMessageInput = Element.new(:css,"textarea:first-of-type")
 
-    @userSettings = Element.new(:xpath,"//*[@id='app-mount']/div[1]/div/div[1]/div/div/div[2]/div[2]/div[1]/div[2]/div[3]/div[3]")
+    @userSettings = Element.new(:xpath,"[aria-label='User Settings']")
 
-    @logOutButton = Element.new(:xpath,"//*[@id='app-mount']/div[1]/div/div[1]/div[2]/div/div[1]/div/div/div/div/div[19]")
+    @logOutButton = Element.new(:xpath,"//div//div[text()='Log Out']")
 
-    @logOutConfirm = Element.new(:xpath,"//*[@id='app-mount']/div[4]/div[2]/div/form/div[3]/button[1]")
+    @logOutConfirm = Element.new(:xpath,"//button//div[text()='Log Out']")
+
+    @privacyButton = Element.new(:xpath,"//div[text()='Privacy & Safety']")
+
+    @checkBoxEdge = Element.new(:xpath,"(//label)[3]")
+
   end
+  
 
   def fill_form(user)
     @email.visible?
