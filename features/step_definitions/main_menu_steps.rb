@@ -18,7 +18,8 @@ Then('I should see side menu') do
   expect(@pages.side_menu.side_menu_sections).not_to be_empty
 end
 
-Given(/^I am in the "(.*)" screen$/) do |screen_name|
+Given(/^I am in the "(.*)" screen by swiping "(.*)"$/) do |screen_name, search_direction|
   @pages.header_section.invoke_side_menu
-  @pages.side_menu.select_category(screen_name)
+  sleep 2
+  @pages.side_menu.select_category(screen_name, search_direction)
 end

@@ -1,6 +1,7 @@
 Before do
   @driver.start_driver
   @pages = Pages.new(@driver)
+  @saved_data = SavedConversionData.new()
 end
 
 After do |scenario|
